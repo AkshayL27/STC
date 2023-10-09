@@ -1,0 +1,15 @@
+{
+  "name": "Password protecter",
+  "version": "0.0.0.1",
+  "manifest_version": 3,
+  "description": "A password protcter and generator extension",
+  "icons": {
+    "16": "icon/icon16.png",
+    "32": "icon/icon32.png",
+    "64": "icon/icon64.png",
+    "128": "icon/icon128.png"
+  },
+  "action": {
+    "default_popup": "popup/popup.html"
+  }
+}
