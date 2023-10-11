@@ -1,9 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\icon",
-    "\\popup"
+    "\\Backend"
   ],
-  "SelectedNode": "\\manifest.json",
+  "SelectedNode": "\\Backend\\index.js",
   "PreviewInSolutionExplorer": false
 }
