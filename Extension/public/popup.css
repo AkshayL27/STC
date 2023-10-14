@@ -1,0 +1,106 @@
+body {
+    width: 400px;
+    font-size: small;
+    color: #336dab;
+    background:linear-gradient(to top, #1d4065,#76afeb);
+    animation: gradtransition  5s infinite linear;
+    background-size: 200% 200%;
+}
+button {
+    background-color: #336dab;
+    border: none;
+    color: white;
+    text-align: center;
+    padding: 5px;
+    border-radius: 3rem;
+    transition: 0.1s ease;
+}
+.root{
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    display: grid;
+    justify-content: center;
+}
+.seperator{
+    background-color: #265281;
+    height: 3px;
+    width: auto;
+    
+}
+.container{
+    margin-top: 15px;
+    display: grid;
+    justify-items: center;
+    border-radius: 10px;
+}
+.generatePassword{
+    font-size: small;
+    text-align: center;
+    
+}
+button:hover{
+    background-color: #265281;
+    transform: scale(1.02);
+}
+section.generated-password{
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+.generatedPassword ,.copy-password{
+    margin-top: 10px;
+    height: 1.5rem;
+    border-radius: 2rem;
+}
+.generatedPassword{
+    width: 100%;
+    border-radius: .5rem 0 0 .5rem;
+    border: 1px solid gray;
+    border-right: none;
+    background-color: rgb(202, 202, 202);
+    font-size: 1rem;
+    color: #1d4065;
+    outline: none;
+}
+.copy-password{
+    height: 1.7rem;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid gray;
+    border-left: none;
+    border-radius: 0 .5rem .5rem 0;
+}
+.confirmation{
+    position: absolute;
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    height: 41%;
+    width: 80%;
+    display: flex;
+    background-color: white;
+    justify-content: center;
+    align-items: center;
+    font-weight: 500;
+    pointer-events: none;
+    opacity: 0;
+    transition: all .1s ease;
+    &.active{
+        pointer-events: all;
+        opacity: 1;
+    }
+}
+@keyframes gradtransition {
+    0% {
+      background-position: 0 100%;
+    }
+    50% {
+      background-position: 100% 0;
+    }
+    100%{
+        background-position: 0 100%;
+    }
+  }
