@@ -4,11 +4,11 @@ const session = require('express-session');
 const csrf = require('csurf');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const csrfProtection = csrf({ cookie: true });
 
 const app = express();
 app.use(express.json());
-mongoose.connect('mongodb+srv://Develper:AIXsZe815TEfIeVW@browserextension.95rndmy.mongodb.net/?retryWrites=true&w=majority', { useNewUrlParser: true });
+const uri = 'mongodb+srv://Develper:AIXsZe815TEfIeVW@browserextension.95rndmy.mongodb.net/?retryWrites=true&w=majority'
+mongoose.connect(uri);
 
 // User userschema
 const userSchema = new mongoose.Schema({
@@ -37,7 +37,7 @@ app.use(session({
 }));
 
 // CSRF Protection Middleware
-app.use(csrfProtection);
+//app.use(csrfProtection);
 
 // Signup
 app.post('/signup', async (req, res) => {
