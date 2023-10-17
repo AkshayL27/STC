@@ -1,17 +1,19 @@
-*{
+body{
     margin: 0;
     padding: 0;
     font-family: 'Poppins',sans-serif;
     box-sizing: border-box;
+    width:500px;
+    height: 600px;
     /* background:black; */
 }
 .form-box{
     width: 90%;
     max-width: 450px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%,-50%);
+    /* top: 50%; */
+    /* left: 50%; */
+    /* transform: translate(-50%,-50%); */
     background: #fff;
     padding: 50px 60px 70px;
     text-align: center;
