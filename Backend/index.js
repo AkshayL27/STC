@@ -1,7 +1,6 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
-//const csrf = require('csurf');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
