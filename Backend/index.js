@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
-const csrf = require('csurf');
+//const csrf = require('csurf');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -113,25 +113,147 @@ app.get('/profile', async (req, res) => {
 
 
 // Add website data
-app.post('/add-website', async (req, res) => {
-    const { userId, websiteData } = req.body;
+app.post('/website', async (req, res) => {
+    
+
+    const token = req.headers['authorization'];
+
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const { websiteData } = req.body;
 
     try {
-        const user = await User.findById(userId);
+        const decoded = jwt.verify(token, 'your-secret-key');
+        const user = await User.findById(decoded.userId);
+
         if (!user) {
-            return res.status(404).json({ message: 'User not found' });
+            return res.status(401).json({ message: 'Unauthorized' });
         }
 
         user.websites.push(websiteData);
         await user.save();
-
         res.status(201).json({ message: 'Website added successfully' });
-    } catch (error) {
-        res.status(500).json({ message: 'Error adding website' });
+
+    } catch (err) {
+        return res.status(500).json({ message: 'Error adding website' });
     }
 });
 
 
+app.put('/website', async (req, res) => {
+    const token = req.headers['authorization'];
+
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const { oldWebsiteData, newWebsiteData } = req.body;
+
+    if (!oldWebsiteData || !newWebsiteData) {
+        return res.status(400).json({ message: 'Both old and new website data are required' });
+    }
+
+    try {
+        const decoded = jwt.verify(token, 'your-secret-key');
+        const user = await User.findById(decoded.userId);
+
+        if (!user) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+
+        // Find the index of the website to be updated based on the old website data.
+        const websiteIndexToUpdate = user.websites.findIndex((website) => {
+            return (
+                website.name === oldWebsiteData.name &&
+                website.url === oldWebsiteData.url &&
+                website.password === oldWebsiteData.password
+            );
+        });
+
+        if (websiteIndexToUpdate === -1) {
+            return res.status(404).json({ message: 'Website not found' });
+        }
+
+        // Update the website data at the specified index with the new data.
+        user.websites[websiteIndexToUpdate] = newWebsiteData;
+
+        await user.save();
+        res.status(200).json({ message: 'Website updated successfully' });
+
+    } catch (err) {
+        return res.status(500).json({ message: 'Error updating website' });
+    }
+});
+
+app.get('/website/:identifier', async (req, res) => {
+    const token = req.headers['authorization'];
+
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const { identifier } = req.params;
+
+    try {
+        const decoded = jwt.verify(token, 'your-secret-key');
+        const user = await User.findById(decoded.userId);
+
+        if (!user) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+
+        // Search for a website matching the identifier (name or URL)
+        const matchedWebsite = user.websites.find((website) => {
+            return website.name === identifier || website.url === identifier;
+        });
+
+        if (matchedWebsite) {
+            res.status(200).json(matchedWebsite);
+        } else {
+            res.status(404).json({ message: 'Website not found' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: 'Error finding website' });
+    }
+});
+
+app.delete('/website/:identifier', async (req, res) => {
+    const token = req.headers['authorization'];
+
+    if (!token) {
+        return res.status(401).json({ message: 'Unauthorized' });
+    }
+
+    const { identifier } = req.params;
+
+    try {
+        const decoded = jwt.verify(token, 'your-secret-key');
+        const user = await User.findById(decoded.userId);
+
+        if (!user) {
+            return res.status(401).json({ message: 'Unauthorized' });
+        }
+
+        // Find the index of the website to be deleted based on the identifier (name or URL).
+        const websiteIndexToDelete = user.websites.findIndex((website) => {
+            return website.name === identifier || website.url === identifier;
+        });
+
+        if (websiteIndexToDelete === -1) {
+            return res.status(404).json({ message: 'Website not found' });
+        }
+
+        // Remove the website at the specified index from the user's websites array.
+        user.websites.splice(websiteIndexToDelete, 1);
+
+        await user.save();
+        res.status(204).json({ message: 'Website deleted successfully' });
+    } catch (err) {
+        res.status(500).json({ message: 'Error deleting website' });
+    }
+});
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');
