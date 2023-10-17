@@ -9,11 +9,12 @@
 <body>
     <div class="root">
         <div class="savePassword">
-           <h1> Saved password appears here </h1>
+            <a href="./signin/index.html"><button>back</button></a>
+           <h1> Generate Password </h1>
         </div>
         <div class="seperator"></div>
         <div class="container">
-            <button id="generatePassword">Generate Password</button>
+            <button id="generatePassword">Suggest a Strong Password</button>
             <section class="generated-password">
                 <input type="text" class="generatedPassword" id="generatedPassword" spellcheck="false">
                 <button class="copy-password" id="copy-password">copy</button>
@@ -21,11 +22,6 @@
             <div class="confirmation" id="confirmation"><h3>Password Copied!</h3></div>
         </div>
     </div>
-    
-    <!-- <h1>Display the NASA picture of the day</h1>
-    <h2>(select the image to remove)</h2>
-    <p id="pwd">password....</p>
-    <button id="sendmessageid">Display</button> -->
     <script src="popup.js"></script>
     <script src="pwdgenerator.js"></script>
 </body>
