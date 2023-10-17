@@ -1,7 +1,10 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+<<<<<<< Updated upstream
 const csrf = require('csurf');
+=======
+>>>>>>> Stashed changes
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
