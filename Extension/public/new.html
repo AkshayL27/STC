@@ -3,47 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="popup.css">
     <title>Document</title>
     <style>
-        body{
-            width: 100px;
-            height: 100px;
+        .getpwd{
+            margin: 10px;
+            width: 200px;
         }
-        .hello{
-            /* flex-basis: 48%; */
-         background: black;
-       color: #fff;
-           height: 40px;
-    border-radius:20px;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-    margin-bottom: 100px;
-        }
-        .world{
-            /* flex-basis: 48%; */
-            flex: none;
-    background:black;
-    height: 40px;
-    border-radius:20px;
-    border: 0;
-    outline: 0;
-    cursor: pointer;
-     }
-     .some{
-        font-size: 40px;
-     }
-     .new{
-        font-size: 40px;
-        height: 40px;
-     }
-     a{
-        color: #fff;
-     }
     </style>
 </head>
 <body>
-<button class="hello"><a href="./popup.html"> generate password</a></button>
-<button class="world"><a href="./get.html">get password</a></button>
+    <div class="root">
+        <a href="./popup.html"><button class="getpwd">generate password</button></a>
+        <div class="seperator"></div>
+        <a href="./get.html"><button class="getpwd">get password</button></a>
+    </div>
 </body>
 </html>

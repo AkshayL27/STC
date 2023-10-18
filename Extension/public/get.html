@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="popup.css">
     <title>Document</title>
+    <style>
+        .heading{
+            position: relative;
+            left: 10%;
+        }
+    </style>
 </head>
 <body>
-    get password="ABCD";
+    <div class="root">
+        <a href="new.html"><button class="back-btn">Back</button></a>
+        <div class="seperator"></div>
+        <h1 class="heading">Your Password</h1>
+        <div class="container">
+            <section class="generated-password">
+                <input type="text" class="generatedPassword" id="userPassword" spellcheck="false">
+                <button class="copy-password" id="copypassword">copy</button>
+            </section>
+            <div class="confirmation" id="confirm"><h3>Password Copied!</h3></div>
+        </div>
+    </div>
+    <script src="get.js"></script>
 </body>
 </html>
