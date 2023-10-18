@@ -74,12 +74,12 @@ form p a{
     text-decoration: none;
     color: #3c00a0;
 }
-.btn-field{
+.btn-field,.some{
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-.btn-field button{
+.btn-field button ,.some{
     flex-basis: 48%;
     background: #3c00a0;
     color: #fff;

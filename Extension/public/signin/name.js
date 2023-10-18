@@ -6,13 +6,13 @@ let signupBtn=document.getElementById("signupBtn");
     loginBtn.onclick=function(){
         nameField.style.maxHeight='0';
         title.innerHTML='Login';
-        signupBtn.classList.add("disable");
-        loginBtn.classList.remove("disable");
+        // signupBtn.classList.add("disable");
+        // loginBtn.classList.remove("disable");
     }
 
     signupBtn.onclick=function(){
         nameField.style.maxHeight='60px';
         title.innerHTML='Sign Up';
-        signupBtn.classList.remove("disable");
-        loginBtn.classList.add("disable");
+        // signupBtn.classList.remove("disable");
+        // loginBtn.classList.add("disable");
     }
