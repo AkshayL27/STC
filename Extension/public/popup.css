@@ -1,36 +1,42 @@
 body {
+    font-family: 'Poppins',sans-serif;
     width: 400px;
     font-size: small;
-    color: #336dab;
-    background:linear-gradient(to top, #1d4065,#76afeb);
-    animation: gradtransition  5s infinite linear;
+    color: #3c00a0;
+    background:linear-gradient(45deg,black 10%,#3c00a0,#a675f5);
+    animation: gradtransition  4s infinite linear;
     background-size: 200% 200%;
 }
 button {
-    background-color: #336dab;
+    background-color: #3c00a0;
     border: none;
     color: white;
     text-align: center;
     padding: 5px;
-    border-radius: 3rem;
+    border-radius: 1.5rem;
     transition: 0.1s ease;
+    margin: 5px 0 5px 0;
 }
 .root{
+    position: relative;
     background-color: white;
+    width: 95.5%;
+    height: 99%;
     padding: 10px;
-    border-radius: 10px;
+    border-radius: .8rem;
     display: grid;
     justify-content: center;
 }
 .seperator{
-    background-color: #265281;
+    background-color: #280069;
     height: 3px;
     width: auto;
     
 }
 .container{
-    margin-top: 15px;
+    margin: 15px 0 15px 0;
     display: grid;
+    width: 100%;
     justify-items: center;
     border-radius: 10px;
 }
@@ -40,7 +46,7 @@ button {
     
 }
 button:hover{
-    background-color: #265281;
+    background-color: #280069;
     transform: scale(1.02);
 }
 section.generated-password{
@@ -49,7 +55,7 @@ section.generated-password{
     align-items: center;
 }
 .generatedPassword ,.copy-password{
-    margin-top: 10px;
+    margin-top: 20px;
     height: 1.5rem;
     border-radius: 2rem;
 }
@@ -60,12 +66,14 @@ section.generated-password{
     border-right: none;
     background-color: rgb(202, 202, 202);
     font-size: 1rem;
-    color: #1d4065;
+    color: #3c00a0;
     outline: none;
+    margin: 0;
 }
 .copy-password{
-    height: 1.7rem;
+    height: 1.8rem;
     width: 2rem;
+    margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -75,10 +83,10 @@ section.generated-password{
 }
 .confirmation{
     position: absolute;
-    top: 70%;
+    top: 74%;
     left: 50%;
     transform: translate(-50%, -50%);
-    height: 41%;
+    height: 43%;
     width: 80%;
     display: flex;
     background-color: white;
