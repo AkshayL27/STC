@@ -3,34 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   
-    <title>Document</title>
+    <title>Login - Password Protector</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <!-- <script src="https://kit.fontawesome.com/c4254e24a8.js" crossorigin="anonymous"></script> -->
-
+    <!-- <link rel="stylesheet" href="https://kit.fontawesome.com/c4254e24a8.css" crossorigin="anonymous"> -->
 </head>
 <body>
     <div class="form-box"> 
         <h1 id="title">Login</h1>
-        <form >
+        <form>
             <div class="input-group">
                 <div class="input-field">
                     <i class="glyphicon glyphicon-envelope"></i>
-                    <input type="email" placeholder="Email">
+                    <input type="email" name="email" placeholder="Email">
                 </div>
                 <div class="input-field">
                     <i class="glyphicon glyphicon-lock"></i>
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password">
                 </div>
                 <p>Forgot password <a href="../new.html">Click Here!</a></p>
             </div>
             <div class="btn-field">
                 <a href="index.html" class="some"><button type="button" id="signupBtn">Sign Up</button></a>
-              <button type="button" id="loginBtn" class="disable">Login</button>
+                <button type="submit" id="loginBtn">Login</button>
             </div>
         </form>
     </div>
-    <script src="name.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>
