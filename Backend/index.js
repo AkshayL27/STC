@@ -1,15 +1,27 @@
+require('dotenv').config(); // This will load the environment variables from .env
 const express = require('express');
 const mongoose = require('mongoose');
-const session = require('express-session');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const helmet = require('helmet');
+const compression = require('compression');
+const morgan = require('morgan');
+const cors = require('cors');
 
 const app = express();
+app.use(cors({
+    origin: 'chrome-extension://mpjdfibekcchiaomolepnfhblkfkichh',  // Replace [EXTENSION_ID] with your extension's actual ID
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
+}));
 app.use(express.json());
-const uri = 'mongodb+srv://Develper:AIXsZe815TEfIeVW@browserextension.95rndmy.mongodb.net/?retryWrites=true&w=majority'
-mongoose.connect(uri);
+app.use(helmet()); // Adds security HTTP headers
+app.use(compression()); // Compresses server responses
+app.use(morgan('combined')); // Enables request logging
 
-// User userschema
+const uri = 'mongodb+srv://Develper:AIXsZe815TEfIeVW@browserextension.95rndmy.mongodb.net/?retryWrites=true&w=majority';
+mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+
+// User Schema
 const userSchema = new mongoose.Schema({
     username: String,
     email: String,
@@ -23,53 +35,37 @@ const userSchema = new mongoose.Schema({
     ],
 });
 
-
-// User
 const User = mongoose.model('User', userSchema);
-
-
-// Express Session
-app.use(session({
-    secret: 'your-secret-key',
-    resave: false,
-    saveUninitialized: true,
-}));
-
-// CSRF Protection Middleware
-//app.use(csrfProtection);
 
 // Signup
 app.post('/signup', async (req, res) => {
     const { username, email, password } = req.body;
 
-    // Validate input
     if (!username || !email || !password) {
         return res.status(400).json({ message: 'Invalid input' });
     }
 
-    // Check if the email is already registered
     const existingUser = await User.findOne({ email });
     if (existingUser) {
         return res.status(400).json({ message: 'Email already registered' });
     }
 
-    // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const user = new User({ username, email, password: hashedPassword });
     try {
         await user.save();
+        console.log("signup successful");
         res.status(201).json({ message: 'User registered successfully' });
     } catch (err) {
         res.status(500).json({ message: 'Error signing up' });
-    }    
+    }
 });
 
 // Login
 app.post('/login', async (req, res) => {
     const { email, password } = req.body;
 
-    // Validate input
     if (!email || !password) {
         return res.status(400).json({ message: 'Invalid input' });
     }
@@ -80,9 +76,35 @@ app.post('/login', async (req, res) => {
         return res.status(401).json({ message: 'Authentication failed' });
     }
 
-    // Generate a JWT token
-    const token = jwt.sign({ userId: user._id }, 'your-secret-key', { expiresIn: '1d' });
+    const token = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1d' });
     res.json({ token });
+});
+
+app.post('/refresh-token', async (req, res) => {
+    const refreshToken = req.body.refreshToken;
+    
+    if (!refreshToken) {
+    return res.status(400).json({ message: 'Invalid refresh token' });
+    }
+    
+    try {
+    const decoded = jwt.verify(refreshToken, process.env.JWT_SECRET);
+    const user = await User.findById(decoded.userId);
+    
+    if (!user) {
+      return res.status(401).json({ message: 'Unauthorized' });
+    }
+    
+    const newAccessToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+    const newRefreshToken = jwt.sign({ userId: user._id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    
+    res.status(200).json({
+      accessToken: newAccessToken,
+      refreshToken: newRefreshToken,
+    });
+    } catch (err) {
+    return res.status(500).json({ message: 'Error refreshing token' });
+    }
 });
 
 // Protected route with JWT
@@ -94,7 +116,7 @@ app.get('/profile', async (req, res) => {
     }
 
     try {
-        const decoded = jwt.verify(token, 'your-secret-key');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded.userId);
 
         if (!user) {
@@ -110,11 +132,8 @@ app.get('/profile', async (req, res) => {
     }
 });
 
-
 // Add website data
 app.post('/website', async (req, res) => {
-    
-
     const token = req.headers['authorization'];
 
     if (!token) {
@@ -124,7 +143,7 @@ app.post('/website', async (req, res) => {
     const { websiteData } = req.body;
 
     try {
-        const decoded = jwt.verify(token, 'your-secret-key');
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded.userId);
 
         if (!user) {
@@ -134,11 +153,11 @@ app.post('/website', async (req, res) => {
         user.websites.push(websiteData);
         await user.save();
         res.status(201).json({ message: 'Website added successfully' });
-
     } catch (err) {
         return res.status(500).json({ message: 'Error adding website' });
     }
 });
+
 
 
 app.put('/website', async (req, res) => {
