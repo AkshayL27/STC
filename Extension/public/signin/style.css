@@ -2,10 +2,12 @@ body{
     margin: 0;
     padding: 0;
     font-family: 'Poppins',sans-serif;
-    box-sizing: border-box;
-    width:500px;
+    /* box-sizing: border-box; */
+    width:450px;
     height: 600px;
-    /* background:black; */
+    background:linear-gradient(45deg,black 10%,#3c00a0,#a675f5);
+    animation: gradtransition  4s infinite linear;
+    background-size: 200% 200%;
 }
 .form-box{
     width: 98%;
@@ -77,12 +79,12 @@ form p a{
     text-decoration: none;
     color: #3c00a0;
 }
-.btn-field,.some{
+.btn-field{
     width: 100%;
     display: flex;
     justify-content: space-between;
 }
-.btn-field button ,.some{
+.btn-field button{
     flex-basis: 48%;
     background: #3c00a0;
     color: #fff;
