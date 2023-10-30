@@ -25,10 +25,16 @@
 
         <div class="seperator"></div>
         <h1 class="heading">Your Password for</h1>
-        <input type="text" id="websiteUrl" spellcheck="false" value="website name">
+        <form>
+            <div class="form_get">
+                <input type="text" name="websiteName" spellcheck="false" placeholder="Website Name">  OR 
+                <input type="text" name="websiteUrl" spellcheck="false" placeholder="Website URL">
+                <button type="submit">Get password</button>
+            </div>
+        </form>
         <div class="container">
             <section class="generated-password">
-                <input type="text" class="generatedPassword" id="userPassword" spellcheck="false">
+                <input type="text" class="generatedPassword" name="userPassword" spellcheck="false">
                 <button class="copy-password" id="copypassword">copy</button>
             </section>
             <div class="confirmation" id="confirm"><h3>Password Copied!</h3></div>
