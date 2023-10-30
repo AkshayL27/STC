@@ -13,28 +13,29 @@
 <body>
     <div class="form-box"> 
         <h1 id="title">Sign Up</h1>
-        <form >
+        <form>
             <div class="input-group">
                 <div class="input-field" id="nameField">
                     <i class="glyphicon glyphicon-user"></i>
-                    <input type="text" placeholder="Name">
+                    <input type="text" name="username" placeholder="Name">
                 </div>
                 <div class="input-field">
                     <i class="glyphicon glyphicon-envelope"></i>
-                    <input type="email" placeholder="Email">
+                    <input type="email" name="email" placeholder="Email">
                 </div>
                 <div class="input-field">
                     <i class="glyphicon glyphicon-lock"></i>
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password">
                 </div>
                 <p>Forgot password <a href="../new.html">Click Here!</a></p>
             </div>
             <div class="btn-field">
                 <button type="submit" id="signupBtn">Sign Up</button>
-                <button type="button" id="loginBtn" class="disable">Login</button>
+                <a href="login.html"><button type="button" id="loginBtn" >Login</button></a>
             </div>
         </form>
     </div>
-    <script src="name.js"></script>
 </body>
+<script src="index.js"></script>
+
 </html>

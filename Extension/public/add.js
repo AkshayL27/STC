@@ -1,11 +1,5 @@
 const cpubtn2 = document.getElementById('addpassword');
 const conf2 =document.getElementById('confirm');
-cpubtn2.addEventListener('click',()=>{
-    conf2.classList.add('active');
-    setTimeout(()=>{
-        conf2.classList.remove('active');
-    },2000)
-});
 
 const token = localStorage.getItem('token').toString();
 
@@ -32,3 +26,15 @@ form.addEventListener('submit', (e) => {
     });
 });
 
+const getWebsiteButton = document.getElementById('getwebsite');
+const websiteUrlInput = document.querySelector('input[name="url"]');
+
+getWebsiteButton.addEventListener('click', () => {
+    // Use the browser's built-in API to get the current tab's URL
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        if (tabs.length > 0) {
+            const currentUrl = tabs[0].url;
+            websiteUrlInput.value = currentUrl;
+        }
+    });
+});

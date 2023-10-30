@@ -22,10 +22,9 @@ form.addEventListener('submit', (e) => {
     .then(loginData => {
         const token = loginData.token;
         console.log(token);
-        localStorage.setItem('token', token);
 
         // Go to another page with the token in the URL
-        window.location.href = '../new.html';
+        window.location.href = `../new.html?token=${token}`;
     })
     .catch(error => {
         console.error(`Error: ${error}`);

@@ -1,3 +1,10 @@
+const token = localStorage.getItem('token');
+
+if (token) {
+    window.location.href = 'get.html';
+}
+
+
 const form = document.querySelector('form');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -32,9 +39,8 @@ form.addEventListener('submit', (e) => {
         const token = loginData.token; 
         console.log(token);
         localStorage.setItem('token', token);
-
         // Redirect to another page with the token in the URL
-        window.location.href = '../new.html?token=${token}';
+        window.location.href = '../new.html';
     })
     .catch(error => {
         console.error(error);

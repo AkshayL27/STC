@@ -9,6 +9,40 @@ cpubtn2.addEventListener('click',()=>{
     },2000)
 });
 
+// get.js
+
+const urlParams = new URLSearchParams(window.location.search);
+const urll = urlParams.get('url');
+
+if (urll) {
+    const token = localStorage.getItem('token');
+
+    fetch(`http://localhost:3000/website/${encodeURIComponent(urll)}`, {
+        method: 'GET',
+        headers: {
+            'authorization': token,
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        const userPassword = document.querySelector('.generatedPassword');
+        userPassword.value = data.password;
+    })
+    .catch(error => {
+        if (error instanceof TypeError && error.message === 'Failed to fetch') {
+            console.error('Network error:', error);
+        } 
+        else {
+            console.error('Error:', error);
+            if (response.status === 404) {
+                // Make a website not found error page
+                console.error('Resource not found (404)');
+            }
+        }
+    });
+}
+
+
 const form = document.querySelector('form');
 form.addEventListener('submit', (e)=>{
     e.preventDefault();

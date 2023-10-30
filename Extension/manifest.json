@@ -1,9 +1,22 @@
 {
-  "name": "Password protecter",
+  "name": "Password protector",
   "version": "0.0.0.1",
   "manifest_version": 3,
-  "permissions": ["storage", "tabs"],
-  "description": "A password protcter and generator extension",
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab"
+  ],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["public/content.js"]
+    }
+  ],
+  "background": {
+    "service_workers": ["public/background.js"]
+  },
+  "description": "A password protector and generator extension",
   "icons": {
     "16": "icon/icon16.png",
     "32": "icon/icon32.png",

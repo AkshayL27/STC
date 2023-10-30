@@ -108,7 +108,7 @@ app.post('/refresh-token', async (req, res) => {
 });
 
 // Protected route with JWT
-app.get('/profile', async (req, res) => {
+app.get('/weburls', async (req, res) => {
     const token = req.headers['authorization'];
 
     if (!token) {
@@ -123,14 +123,18 @@ app.get('/profile', async (req, res) => {
             return res.status(401).json({ message: 'Unauthorized' });
         }
 
+        // Extract website URLs from the user object
+        const websiteURLs = user.websites.map(website => website.url);
+
         res.json({
             message: `Welcome, ${user.username}!`,
-            websites: user.websites,
+            websites: websiteURLs, // Send only website URLs
         });
     } catch (err) {
         return res.status(500).json({ message: 'Error finding user' });
     }
 });
+
 
 // Add website data
 app.post('/website', async (req, res) => {

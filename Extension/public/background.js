@@ -1,14 +1,9 @@
-const currentUrl = window.location.href;
-console.log(currentUrl);
+// background.js
 
-chrome.tabs.onUpdated.addListener((tabId, tab) => {
-    if (tab.url) {
-      const queryParameters = tab.url.split("?")[1];
-      const urlParameters = new URLSearchParams(queryParameters);
-
-      chrome.tabs.sendMessage(tabId, {
-        type: "NEW",
-        videoId: urlParameters.get("v"),
-      });
-    }
-  });
+// Listen for messages from content scripts
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+  if (message.showPopup) {
+      // Show the extension popup (set the popup URL to get.html and pass the URL as a parameter)
+      chrome.action.setPopup({ popup: 'get.html?url=' + encodeURIComponent(message.url) });
+  }
+});
