@@ -46,12 +46,6 @@ button {
     text-align: center;
     
 }
-#websiteUrl{
-    border:none;
-    text-align:center;
-    font-size:large;
-    color:#280069;
-}
 button:hover{
     background-color: #280069;
     transform: scale(1.02);
