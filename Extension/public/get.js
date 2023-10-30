@@ -53,10 +53,11 @@ form.addEventListener('submit', (e)=>{
 
 
     if (!name && !url) {
-        // Make an empty field error
+        alert('Please enter atleast one of the fields');
+        return;
     }
     else if (!url) {
-        fetch('http://localhost:3000/website/${name}', {
+        fetch(`http://localhost:3000/website/${encodeURIComponent(name)}`, {
             method: 'GET',
             headers: {
                 'authorization': token,
@@ -81,7 +82,7 @@ form.addEventListener('submit', (e)=>{
         });
     }
     else if (!name) {
-        fetch('http://localhost:3000/website/${url}', {
+        fetch(`http://localhost:3000/website/${encodeURIComponent(url)}`, {
             method: 'GET',
             headers: {
                 'authorization': token,
@@ -107,7 +108,7 @@ form.addEventListener('submit', (e)=>{
     }
     else {
         var pass1,pass2;
-        fetch('http://localhost:3000/website/${name}', {
+        fetch(`http://localhost:3000/website/${encodeURIComponent(name)}`, {
             method: 'GET',
             headers: {
                 'authorization': token,
@@ -130,7 +131,7 @@ form.addEventListener('submit', (e)=>{
             }
         });
 
-        fetch('http://localhost:3000/website/${url}', {
+        fetch(`http://localhost:3000/website/${encodeURIComponent(url)}`, {
             method: 'GET',
             headers: {
                 'authorization': token,
@@ -161,6 +162,4 @@ form.addEventListener('submit', (e)=>{
             // Add a page for 2 diffrent passwords not being same as you have provided url as well as name
         }
     }
-
-    
 });

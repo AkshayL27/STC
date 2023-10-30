@@ -1,7 +1,7 @@
 const token = localStorage.getItem('token');
 
 if (token) {
-    window.location.href = 'get.html';
+    window.location.href = '../new.html';
 }
 
 
@@ -39,10 +39,9 @@ form.addEventListener('submit', (e) => {
         const token = loginData.token; 
         console.log(token);
         localStorage.setItem('token', token);
-        // Redirect to another page with the token in the URL
         window.location.href = '../new.html';
     })
     .catch(error => {
-        console.error(error);
+        //console.error(error);
     });
 });

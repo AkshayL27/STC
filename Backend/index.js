@@ -146,6 +146,10 @@ app.post('/website', async (req, res) => {
 
     const { websiteData } = req.body;
 
+    if (!websiteData || Object.keys(websiteData).length === 0) {
+        return res.status(400).json({ message: 'Invalid website data' });
+    }
+
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET);
         const user = await User.findById(decoded.userId);
@@ -161,6 +165,7 @@ app.post('/website', async (req, res) => {
         return res.status(500).json({ message: 'Error adding website' });
     }
 });
+
 
 
 

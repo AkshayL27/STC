@@ -1,25 +1,42 @@
-const cpubtn2 = document.getElementById('addpassword');
-const conf2 =document.getElementById('confirm');
-
-const token = localStorage.getItem('token').toString();
-
 const form = document.querySelector('form');
 form.addEventListener('submit', (e) => {
     e.preventDefault();
 
     const formData = new FormData(form);
-    const res = Object.fromEntries(formData);
-    const payload = JSON.stringify(res);
+    const name = formData.get('name');
+    const url = formData.get('url');
+    const password = formData.get('password');
+
+    // Check if any required field is empty
+    if (!name || !url || !password) {
+        // Display an error message to the user
+        alert('Please fill in all required fields.');
+        return; // Prevent the POST request if fields are empty
+    }
+
+    // Create the "websiteData" object with the form data
+    const websiteData = {
+        name,
+        url,
+        password
+    };
+
+    const token = localStorage.getItem('token').toString();
+    const payload = JSON.stringify({ websiteData });
 
     fetch('http://localhost:3000/website', {
         method: "POST",
         body: payload,
         headers: {
+            'Content-Type': 'application/json',
             'authorization': token,
         }
     })
-    .then(response => response.json)
-    .then()
+    .then(response => response.json())
+    .then(data => {
+        // Handle the response, if needed
+        console.log('Response:', data);
+    })
     .catch(error => {
         console.error(`Error: ${error}`);
         // Handle the error, e.g., display an error message to the user
