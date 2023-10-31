@@ -1,6 +1,6 @@
 const cpubtn2 = document.getElementById('copypassword');
 const conf2 =document.getElementById('confirm');
-const pwd = document.getElementById('userPassword');
+const pwd = document.getElementsByName('userPassword');
 cpubtn2.addEventListener('click',()=>{
     navigator.clipboard.writeText(pwd.value);
     conf2.classList.add('active');

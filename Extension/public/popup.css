@@ -4,6 +4,7 @@ body {
     height: 300px;
     font-size: small;
     color: #3c00a0;
+    min-height: max-content;
     background:linear-gradient(45deg,black 10%,#3c00a0,#a675f5);
     animation: gradtransition  4s infinite linear;
     background-size: 200% 200%;
@@ -21,8 +22,9 @@ button {
 .root{
     position: relative;
     background-color: white;
+    min-height: max-content;
     width: 95.5%;
-    height: 99%;
+    height: 93%;
     padding: 10px;
     border-radius: .8rem;
     display: grid;
@@ -30,9 +32,44 @@ button {
 }
 .seperator{
     background-color: #280069;
-    height: 3px;
+    height: 4px;
+    border-radius: 20rem;
     width: auto;
     
+}
+.header{
+    width: 120%;
+    justify-self: center;
+}
+.heading{
+    width: 100%;
+    text-align: center;
+}
+.getform{
+    width: 100%;
+    justify-self: center;
+}
+.form_get{
+    display: grid;
+    position: relative;
+    justify-content: center;
+}
+.form_get input{
+    border: none;
+    width: 100%;
+    font: large;
+    border-bottom: 3px solid #280069;
+    text-align: center;
+}
+.form_get input:focus{
+    outline: none;
+}
+.back{
+    width: 75px;
+}
+.getpwd{
+    margin: 10px;
+    width: 150px;
 }
 .container{
     margin: 15px 0 15px 0;

@@ -89,11 +89,16 @@ form p a{
     background: #3c00a0;
     color: #fff;
     height: 40px;
+    width: 152px;
     border-radius:20px;
     border: 0;
     outline: 0;
     cursor: pointer;
-    transition: background 1s;
+    transition:  0.1s;
+}
+button:hover{
+    background-color: #280069;
+    transform: scale(1.02);
 }
 .input-group{
     height:300px ;
