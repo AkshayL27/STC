@@ -13,16 +13,7 @@ form.addEventListener('submit', (e) => {
         alert('Please fill in all required fields.');
         return; // Prevent the POST request if fields are empty
     }
-    else{
-        const cpubtn2 = document.getElementById('addpass');
-        const conf2 =document.getElementById('confirm');
-        cpubtn2.addEventListener('click',()=>{
-            conf2.classList.add('active');
-            setTimeout(()=>{
-                conf2.classList.remove('active');
-            },2000)
-        });
-    }
+
     // Create the "websiteData" object with the form data
     const websiteData = {
         name,
@@ -64,5 +55,3 @@ getWebsiteButton.addEventListener('click', () => {
         }
     });
 });
-
-
