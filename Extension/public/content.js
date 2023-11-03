@@ -15,7 +15,7 @@ fetch('http://localhost:3000/weburls', {
     .catch(err => {
         console.error(err);
     })
-  
+
 const currentURL = window.location.href;
 
 if (urlsToMatch.includes(currentURL)) {

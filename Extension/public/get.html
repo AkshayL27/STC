@@ -6,6 +6,9 @@
     <link rel="stylesheet" href="popup.css">
     <title>Document</title>
     <style>
+        .root {
+            height: 400px;
+        }
         .active{
             margin-top: 23px;
             height: 90px;
@@ -23,7 +26,8 @@
             <form>
                 <div class="form_get">
                     <input type="text" name="websiteName" spellcheck="false" placeholder="Website Name">  <p style=" text-align: center;">OR</p> 
-                    <input type="text" name="websiteUrl" spellcheck="false" placeholder="Website URL">
+                        <input type="text" name="url" placeholder="Website URL" spellcheck="false">
+                        <button class="getwebsite" id="getwebsite">Current URL</button>
                     <button type="submit" class="getpwd">Get password</button>
                 </div>
             </form>
