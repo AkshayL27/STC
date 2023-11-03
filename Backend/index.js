@@ -19,18 +19,20 @@ app.use(compression()); // Compresses server responses
 app.use(morgan('combined')); // Enables request logging
 
 const uri = 'mongodb+srv://Develper:AIXsZe815TEfIeVW@browserextension.95rndmy.mongodb.net/?retryWrites=true&w=majority';
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(uri, { dbName: "Test", useNewUrlParser: true, useUnifiedTopology: true });
 
 // User Schema
 const userSchema = new mongoose.Schema({
     username: String,
-    email: String,
+    email: { type: String, unique: true},
     password: String,
     websites: [
         {
-            name: String,
-            url: String,
+            name: { type: String, unique: true},
+            url: { type: String, unique: true},
             password: String,
+            type: String,
+            key: String
         },
     ],
 });
@@ -144,10 +146,11 @@ app.post('/website', async (req, res) => {
         return res.status(401).json({ message: 'Unauthorized' });
     }
 
-    const { websiteData } = req.body;
+    const { websiteDataArray } = req.body;
 
-    if (!websiteData || Object.keys(websiteData).length === 0) {
-        return res.status(400).json({ message: 'Invalid website data' });
+    if (!Array.isArray(websiteDataArray) || websiteDataArray.length === 0) {
+        //console.log('Not an array');
+        return res.status(400).json({ message: 'Invalid website data array' });
     }
 
     try {
@@ -158,14 +161,25 @@ app.post('/website', async (req, res) => {
             return res.status(401).json({ message: 'Unauthorized' });
         }
 
-        user.websites.push(websiteData);
+        for (const websiteData of websiteDataArray) {
+            // Check for duplicates
+            const isDuplicate = user.websites.some((existingWebsite) => {
+                return existingWebsite.url === websiteData.url;
+            });
+
+            if (isDuplicate) {
+                return res.status(400).json({ message: 'Website is a duplicate' });
+            }
+
+            user.websites.push(websiteData);
+        }
+
         await user.save();
-        res.status(201).json({ message: 'Website added successfully' });
+        res.status(201).json({ message: 'Websites added successfully' });
     } catch (err) {
         return res.status(500).json({ message: 'Error adding website' });
     }
 });
-
 
 
 
@@ -214,14 +228,12 @@ app.put('/website', async (req, res) => {
     }
 });
 
-app.get('/website/:identifier', async (req, res) => {
+app.get('/website', async (req, res) => {
     const token = req.headers['authorization'];
 
     if (!token) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-
-    const { identifier } = req.params;
 
     try {
         const decoded = jwt.verify(token, 'your-secret-key');
@@ -231,29 +243,20 @@ app.get('/website/:identifier', async (req, res) => {
             return res.status(401).json({ message: 'Unauthorized' });
         }
 
-        // Search for a website matching the identifier (name or URL)
-        const matchedWebsite = user.websites.find((website) => {
-            return website.name === identifier || website.url === identifier;
-        });
+        const allWebsites = user.websites;
 
-        if (matchedWebsite) {
-            res.status(200).json(matchedWebsite);
-        } else {
-            res.status(404).json({ message: 'Website not found' });
-        }
+        res.status(200).json(allWebsites);
     } catch (err) {
-        res.status(500).json({ message: 'Error finding website' });
+        res.status(500).json({ message: 'Error finding websites' });
     }
 });
 
-app.delete('/website/:identifier', async (req, res) => {
+app.delete('/website', async (req, res) => {
     const token = req.headers['authorization'];
 
     if (!token) {
         return res.status(401).json({ message: 'Unauthorized' });
     }
-
-    const { identifier } = req.params;
 
     try {
         const decoded = jwt.verify(token, 'your-secret-key');
@@ -263,24 +266,16 @@ app.delete('/website/:identifier', async (req, res) => {
             return res.status(401).json({ message: 'Unauthorized' });
         }
 
-        // Find the index of the website to be deleted based on the identifier (name or URL).
-        const websiteIndexToDelete = user.websites.findIndex((website) => {
-            return website.name === identifier || website.url === identifier;
-        });
-
-        if (websiteIndexToDelete === -1) {
-            return res.status(404).json({ message: 'Website not found' });
-        }
-
-        // Remove the website at the specified index from the user's websites array.
-        user.websites.splice(websiteIndexToDelete, 1);
+        // Remove all websites from the user's websites array.
+        user.websites = [];
 
         await user.save();
-        res.status(204).json({ message: 'Website deleted successfully' });
+        res.status(204).json({ message: 'All websites deleted successfully' });
     } catch (err) {
-        res.status(500).json({ message: 'Error deleting website' });
+        res.status(500).json({ message: 'Error deleting websites' });
     }
 });
+
 
 app.listen(3000, () => {
     console.log('Server is running on port 3000');

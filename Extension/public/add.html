@@ -37,6 +37,48 @@
         .URL button{
             left: 10%;
         }
+        .active{
+            position: absolute;
+            width: 130%;
+            height: 45%;
+            margin-top: 12%;
+        }
+        /* Hidden checkbox input */
+        .checkbox-input {
+            display: none;
+        }
+
+        /* Slider styles */
+        .slider {
+            position: relative;
+            width: 60px;
+            height: 30px;
+            background-color: #ccc;
+            border-radius: 15px;
+        }
+
+        .slider:before {
+            content: "";
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            background-color: #2196F3;
+            border-radius: 50%;
+            transition: 0.4s;
+        }
+
+        /* Text styles */
+        .text {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            left: 70px;
+        }
+
+        /* Checked state */
+        .checkbox-input:checked + .slider:before {
+            transform: translateX(30px);
+        }
     </style>
 </head>
 <body>
@@ -56,8 +98,16 @@
                 <input type="text" name="name" placeholder="Website Name" spellcheck="false">
                 <input type="text" name="password" placeholder="Password" spellcheck="false">
                 <button type="submit" id="addpass">Add Password</button>
+                <div class="confirmation" id="confirm"><h3>Password Added!</h3></div>
             </div>
         </form>
+        <div>
+            <label class="slider">
+                <input type="checkbox" class="checkbox-input">
+                <span class="slider"></span>
+                <span class="text">IDEA</span>
+            </label>
+        </div>
         </div>
     </div>
     <script src="add.js"></script>
