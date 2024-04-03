@@ -5,12 +5,16 @@ const letterUpperCase = letterLowerCase.map(letter=> letter.toUpperCase());
 let generatedPassword = document.getElementById("generatedPassword").value;
 
 const generatePassword = (lenght) => {
+    var includeUppercase = document.getElementById("uppercaseCheckbox").checked;
+    var includeLowercase = document.getElementById("lowercaseCheckbox").checked;
+    var includeNumbers = document.getElementById("numbersCheckbox").checked;
+    var includeSymbols = document.getElementById("symbolsCheckbox").checked;
     generatedPassword = ' ';
-    let possiblePwdChar = [];
-    digits.forEach(digits => possiblePwdChar.push(digits));
-    specials.forEach(specials => possiblePwdChar.push(specials));
-    letterLowerCase.forEach(letter => possiblePwdChar.push(letter));
-    letterUpperCase.forEach(letter => possiblePwdChar.push(letter));
+    let possiblePwdChar = ['.'];
+    if(includeNumbers===true) digits.forEach(digits => possiblePwdChar.push(digits));
+    if(includeSymbols===true) specials.forEach(specials => possiblePwdChar.push(specials));
+    if(includeLowercase===true) letterLowerCase.forEach(letter => possiblePwdChar.push(letter));
+    if(includeUppercase===true) letterUpperCase.forEach(letter => possiblePwdChar.push(letter));
     for(let i = 0; i <= lenght; i++) {
         generatedPassword+=possiblePwdChar[Math.floor(Math.random()*possiblePwdChar.length)];
     }

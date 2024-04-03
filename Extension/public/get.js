@@ -1,7 +1,6 @@
 const getPasswordButton = document.getElementById('getPassword');
 const form = document.querySelector('form');
 
-
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const formData = new FormData(form);
@@ -195,4 +194,15 @@ function decryptWithIDEA(encryptedPassword, ideaKey) {
   
     return subKeys;
   }
+
+
+const cpubtn = document.getElementById('copy-password');
+const conf =document.getElementById('confirmation');
+cpubtn.addEventListener('click',()=>{
+    navigator.clipboard.writeText(generatedPassword);
+    conf.classList.add('active');
+    setTimeout(()=>{
+        conf.classList.remove('active');
+    },2000)
+})
   
