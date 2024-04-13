@@ -6,40 +6,47 @@
     <link rel="stylesheet" href="popup.css">
     <title>Document</title>
     <style>
-        .root {
-            height: 400px;
-        }
         .active{
-            margin-top: 23px;
-            height: 90px;
+            display: block;
         }
     </style>
 </head>
 <body>
+    <img src="https://video-public.canva.com/VAFKHEvf6I0/v/094501087b.gif" alt="" style="rotate: 300deg; width: 250px; height: 500px; position: absolute; top:225px">
+    <img src="https://video-public.canva.com/VAFKHMYsmyM/v/1b0d7efe92.gif" alt="" style="rotate: 140deg; width: 250px; height: 500px; position: absolute;right: 0%;top: -10%;">
     <div class="root">
-        <div class="header">
-            <a href="new.html"><button class="back">Back</button></a>
-            <div class="seperator"></div>
-            <h1 class="heading">Your Password for</h1>
-        </div>
-        <div class="getform">
-            <form>
-                <div class="form_get">
-                    <input type="text" name="websiteName" spellcheck="false" placeholder="Website Name">  <p style=" text-align: center;">OR</p> 
-                        <input type="text" name="url" placeholder="Website URL" spellcheck="false">
-                        <button class="getwebsite" id="getwebsite">Current URL</button>
-                    <button type="submit" class="getpwd">Get password</button>
-                </div>
-            </form>
-            <div class="container">
-                <section class="generated-password">
-                    <input type="text" class="generatedPassword" name="userPassword" spellcheck="false">
-                    <button class="copy-password" id="copypassword">copy</button>
-                </section>
-                <div class="confirmation" id="confirm"><h3>Password Copied!</h3></div>
+        <a href="new.html">
+            <img src="https://media-public.canva.com/64wDc/MAE14564wDc/1/t.png" alt=""
+            style="filter: invert(100%); width: 20px; padding: 20px;">
+        </a>
+        <div class="container">
+            <h1 class="heading" style="margin-top: 46px;">Get Password</h1>
+            <div class="title-head" style="background-color: white; width: 80%; height: 2px;transform: translate(0,-20px);"></div>
+            <div class="getform">
+                <form>
+                    <div class="form_get">
+                        <input type="text" name="websiteName" spellcheck="false" placeholder="Type Website Name">  <p style=" text-align: center;">OR</p> 
+                        <input type="text" name="websiteUrl" spellcheck="false" placeholder="Type Website URL">
+                        <button class="invertbtn" type="submit" style="margin: 40px 0 0 0; background-color: white; color: black;height: 30px; border-radius: 10px; cursor: pointer;">Get Password</button>
+                    </div>
+                </form>
             </div>
+            <section class="generated-password" style="left: 7%;">
+                <input type="text" class="generatedPassword" name="userPassword" spellcheck="false" style="width: 60%;">
+                <button class="copy-password" id="copy-password" style="height: 28px; width: 50px;" onclick="popup()" >Copy</button>
+            </section>
+            <div class="confirmation" id="confirmation"><h3>Password Copied!</h3></div>
         </div>
     </div>
     <script src="get.js"></script>
+    <script>
+        function popup(){
+            var popup = document.getElementById("confirmation");
+            popup.classList.add("active");
+            setTimeout(function(){
+                popup.classList.remove("active");
+            }, 2000);
+        }
+    </script>
 </body>
 </html>

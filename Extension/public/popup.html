@@ -7,22 +7,51 @@
     <title>Digilocker</title>
 </head>
 <body>
+    <img src="https://video-public.canva.com/VAFKHBrA9Gs/v/07eb5016af.gif" alt="" style="rotate: 120deg; width: 250px; height: 500px; position: absolute; top:125px">
     <div class="root">
-        <div class="savePassword">
-            <a href="new.html"><button class="back">back</button></a>
-           <h1 style="margin-top: 46px;"> Generate Password </h1>
-        </div>
-        <div class="seperator"></div>
+        <a href="new.html">
+            <img src="https://media-public.canva.com/64wDc/MAE14564wDc/1/t.png" alt=""
+            style="filter: invert(100%); width: 20px; padding: 20px;">
+        </a>
         <div class="container">
-            <button id="generatePassword">Suggest a Strong Password</button>
+            <h1 style="margin-top: 46px;"> Generate Password </h1>
+            <div class="title-head" style="background-color: white; width: 80%; height: 2px;transform: translate(0,-20px);"></div>
+            <div class="form-group" style="margin-top: 20px;">
+                <label>Character Types:</label>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="uppercaseCheckbox" checked />
+                    <label class="form-check-label" for="uppercaseCheckbox">
+                        Uppercase
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="lowercaseCheckbox" checked />
+                    <label class="form-check-label" for="lowercaseCheckbox">
+                        Lowercase
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="numbersCheckbox" checked />
+                    <label class="form-check-label" for="numbersCheckbox">
+                        Numbers
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="symbolsCheckbox" checked />
+                    <label class="form-check-label" for="symbolsCheckbox">
+                        Symbols
+                    </label>
+                </div>
+            </div>
+    
+            <button class="invertbtn" id="generatePassword" style="margin: 0 0 10px 0;border-radius: 10px;padding: 0 25px;">Generate</button>
             <section class="generated-password">
-                <input type="text" class="generatedPassword" id="generatedPassword" spellcheck="false">
-                <button class="copy-password" id="copy-password">copy</button>
+                <input type="text" class="generatedPassword" id="generatedPassword" spellcheck="false"/>
+                <button class="copy-password" id="copy-password" style="height: 28px; width: 50px;">Copy</button>
             </section>
-            <div class="confirmation" id="confirmation"><h3>Password Copied!</h3></div>
+            <div class="confirmation" id="confirmation" style="margin-top:10px ;"><h3>Password Copied!</h3></div>
         </div>
     </div>
-    <script src="popup.js"></script>
     <script src="pwdgenerator.js"></script>
 </body>
 </html>
