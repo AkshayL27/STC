@@ -11,29 +11,32 @@
 
 </head>
 <body>
-    <div class="form-box"> 
-        <h1 id="title">Sign Up</h1>
-        <form>
-            <div class="input-group">
-                <div class="input-field" id="nameField">
-                    <i class="glyphicon glyphicon-user"></i>
-                    <input type="text" name="username" placeholder="Name">
+    <img class="logAnimation" src="https://video-public.canva.com/VAFKHIeV6E8/v/07ba2e6363.gif" alt="logAnimation">
+    <div class="form-container">
+        <div class="form-box"> 
+            <h1 id="title">Sign Up</h1>
+            <form>
+                <div class="input-group">
+                    <div class="input-field" id="nameField">
+                        <i class="glyphicon glyphicon-user"></i>
+                        <input type="text" name="username" placeholder="Name">
+                    </div>
+                    <div class="input-field">
+                        <i class="glyphicon glyphicon-envelope"></i>
+                        <input type="email" name="email" placeholder="Email">
+                    </div>
+                    <div class="input-field">
+                        <i class="glyphicon glyphicon-lock"></i>
+                        <input type="password" name="password" placeholder="Password">
+                    </div>
+                    <p>Forgot password <a href="../new.html">Click Here!</a></p>
                 </div>
-                <div class="input-field">
-                    <i class="glyphicon glyphicon-envelope"></i>
-                    <input type="email" name="email" placeholder="Email">
+                <div class="btn-field">
+                    <a href="emailotp.html" > <button type="button" id="signupBtn"  >Sign Up</button></a> 
+                    <a href="login.html"><button type="button" id="loginBtn" >Login</button></a>
                 </div>
-                <div class="input-field">
-                    <i class="glyphicon glyphicon-lock"></i>
-                    <input type="password" name="password" placeholder="Password">
-                </div>
-                <p>Forgot password <a href="../new.html">Click Here!</a></p>
-            </div>
-            <div class="btn-field">
-                <button type="submit" id="signupBtn">Sign Up</button>
-                <a href="login.html"><button type="button" id="loginBtn" >Login</button></a>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 </body>
 <script src="index.js"></script>
