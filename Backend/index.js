@@ -10,7 +10,7 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors({
-    origin: 'chrome-extension://mpjdfibekcchiaomolepnfhblkfkichh',  // Replace [EXTENSION_ID] with your extension's actual ID
+    origin: 'chrome-extension://dhafaeabeddmhjcnggmbdjgkoemmmaib',  // Replace [EXTENSION_ID] with your extension's actual ID
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
 }));
 app.use(express.json());
@@ -19,7 +19,11 @@ app.use(compression()); // Compresses server responses
 app.use(morgan('combined')); // Enables request logging
 
 const uri = 'mongodb+srv://Develper:AIXsZe815TEfIeVW@browserextension.95rndmy.mongodb.net/?retryWrites=true&w=majority';
-mongoose.connect(uri, { dbName: "Test", useNewUrlParser: true, useUnifiedTopology: true });
+// <<<<<<< newtest
+// mongoose.connect(uri, { dbName: "Test", useNewUrlParser: true, useUnifiedTopology: true });
+// =======
+mongoose.connect(uri, { dbName: 'BrowserExtension', useNewUrlParser: true, useUnifiedTopology: true });
+// >>>>>>> main
 
 // User Schema
 const userSchema = new mongoose.Schema({
