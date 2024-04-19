@@ -1,7 +1,8 @@
 const logout = document.getElementById('logout');
 
 logout.addEventListener("click", function(e) {
-    localStorage.removeItem("token");
-    alert("You have been logged out");
+    alert("You will be logged out and all your passwords will be deleted.");
+    localStorage.clear();
+    chrome.storage.local.clear();
     window.location.href = './signin/index.html';
 });
